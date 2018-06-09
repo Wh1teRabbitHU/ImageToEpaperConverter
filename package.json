@@ -1,0 +1,21 @@
+{
+  "name": "image_converter",
+  "version": "0.0.1",
+  "description": "BMP to hexadecimal image data converter for the e_paper library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bmp",
+    "hexa",
+    "converter",
+    "image",
+    "epaper"
+  ],
+  "author": "Wh1te_Rabbit",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "imagejs": "0.0.9"
+  }
+}
