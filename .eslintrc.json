@@ -1,0 +1,136 @@
+// Rules for ESLint 2.2.0 (February 19, 2016)
+// Rules: http://eslint.org/docs/rules
+{
+    "extends": "eslint:recommended",
+    "env": {
+      "node": true,
+      "browser": true,
+      "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2017
+    },
+    "rules": {
+      // Possible Errors
+
+      "no-console": 0, // default: 2
+      "no-extra-parens": 2, // default: 0
+      "no-unexpected-multiline": 2, // default: 0
+
+      // Best Practices
+
+      "block-scoped-var": 2, // default: 0
+      "consistent-return": 2, // defaul: 0
+      "curly": [ 2, "all" ], // default: [ 0, "all" ]
+      "default-case": 2, // default: 0
+      "dot-location": [ 2, "property" ], // default: 0
+      "dot-notation": [ 2, { "allowKeywords": true } ], // default: [ 0, { "allowKeywords": true } ]
+      "eqeqeq": [ 2, "smart" ], // default: 0
+      "no-alert": 1, // default: 0
+      "no-caller": 2, // default: 0
+      "no-case-declarations": 2, // default: 0
+      "no-div-regex": 2, // default: 0
+      "no-else-return": 2, // default: 0
+      "no-empty-pattern": 2, // default: 0
+      "no-eq-null": 2, // default: 0
+      "no-eval": 2, // default: 0
+      "no-extend-native": 2, // default: 0
+      "no-extra-bind": 2, // default: 0
+      "no-floating-decimal": 2, // default: 0
+      "no-implied-eval": 2, // default: 0
+      "no-iterator": 2, // default: 0
+      "no-labels": 2, // default: 0
+      "no-lone-blocks": 2, // default: 0
+      "no-loop-func": 2, // default: 0
+      "no-multi-spaces": [ 2, { "exceptions": { "VariableDeclarator": true, "Property": true } } ], // default: 0
+      "no-multi-str": 2, // default: 0
+      "no-native-reassign": 2, // default: 0
+      "no-new-func": 2, // default: 0
+      "no-new-wrappers": 2, // default: 0
+      "no-new": 2, // default: 0
+      "no-octal-escape": 2, // default: 0
+      "no-process-env": 2, // default: 0
+      "no-proto": 2, // default: 0
+      "no-return-assign": 2, // default: 0
+      "no-script-url": 2, // default: 0
+      "no-self-compare": 2, // default: 0
+      "no-sequences": 2, // default: 0
+      "no-throw-literal": 2, // default: 0
+      "no-unused-expressions": 2, // default: 0
+      "no-useless-call": 2, // default: 0
+      "no-useless-concat": 2, // default: 0
+      "no-void": 2, // default: 0
+      "no-warning-comments": [ 1, { "terms": [ "todo", "fixme", "xxx" ], "location": "start" } ], // default: [ 0, { "terms": [ "todo", "fixme", "xxx" ], "location": "start" } ]
+      "no-with": 2, // default: 0
+      "radix": 2, // default: 0
+      "wrap-iife": [ 2, "outside" ], // default: 0
+      "yoda": [ 2, "never" ], // default: [ 0, "never" ]
+
+      // Strict Mode
+
+      "strict": [ 2, "global" ], // default: 0
+
+      // Variables
+
+      "no-catch-shadow": 2, // default: 0
+      "no-label-var": 2, // default: 0
+      "no-shadow-restricted-names": 2, // default: 0
+      "no-shadow": 2, // default: 0
+      "no-undef-init": 2, // default: 0
+      "no-undefined": 2, // default: 0
+      "no-use-before-define": [ 2, "nofunc" ], // default: 0
+
+      // Node.js and CommonJS
+
+      "global-require": 2, // default: 0
+      "handle-callback-err": 2, // default: 0
+      "no-mixed-requires": 2, // default: [ 0, false ]
+      "no-new-require": 2, // default: 0
+      "no-path-concat": 2, // default: 0
+      "no-process-exit": 2, // default: 0
+
+      // Stylistic Issues
+
+      "array-bracket-spacing": [ 2, "always" ], // default: [ 0, "never" ]
+      "block-spacing": [ 2, "always" ], // default: 0
+      "brace-style": [ 2, "1tbs", { "allowSingleLine": true } ], // default: [ 0, "1tbs" ]
+      "camelcase": [ 2, { "properties": "always" } ], // default: 0
+      "comma-spacing": [ 2, { "before": false, "after": true } ], // default: 0
+      "comma-style": [ 2, "last" ], // default: 0
+      "computed-property-spacing": [ 2, "never" ], // default: [ 0, "never" ]
+      "consistent-this": [ 2, "self" ], // default: [ 0, "that" ]
+      "func-style": [ 2, "declaration" ], // default: 0
+      "id-match": [ 2, "^(\\$)?([_a-zA-Z]{1}[_a-zA-Z0-9]*)?$", { "properties": true } ], // default: 0
+      "indent": [ 2, "tab", { "VariableDeclarator": 1, "SwitchCase": 1 } ], // default: 0
+      "key-spacing": [ 2, { "mode": "minimum" } ], // default 0
+      "linebreak-style": [ 2, "unix" ], // default: [ 0, "unix" ]
+      "lines-around-comment": [ 2, { "beforeBlockComment": true, "afterBlockComment": false, "beforeLineComment": false, "afterLineComment": false, "allowBlockStart": true, "allowBlockEnd": true, "allowObjectStart": true, "allowObjectEnd": true, "allowArrayStart": true, "allowArrayEnd": true }], // default: 0
+      "new-cap": [ 2, { "newIsCap": true, "capIsNew": true, "capIsNewExceptions": [ "Router", "Schema" ] } ], // default: 0
+      "new-parens": 2, // default: 0
+      "newline-after-var": [ 2, "always" ], // default: 0
+      "no-array-constructor": 2, // default: 0
+      "no-lonely-if": 2, // default: 0
+      "no-multiple-empty-lines": [ 2, { "max": 2 } ], // default: 0
+      "no-negated-condition": 2, // default: 0
+      "no-nested-ternary": 2, // default: 0
+      "no-new-object": 2, // default: 0
+      "no-spaced-func": 2, // default: 0
+      "no-trailing-spaces": 2, // default: 0
+      "no-unneeded-ternary": 2, // default: 0
+      "object-curly-spacing": [ 2, "always" ], // default: [ 0, "never" ]
+      "operator-assignment": [ 2, "always" ], // default: [ 0, "always" ]
+      "operator-linebreak": [ 2, "after" ], // default: 0
+      "quote-props": [ 2, "as-needed" ], // default: 0
+      "quotes": [ 2, "single" ], // default: [ 0, "double" ]
+      "semi": [ 2, "always" ], // default: 0
+      "semi-spacing": [ 2, { "before": false, "after": true } ], // default: [ 0, { "before": false, "after": true } ]
+      "keyword-spacing": 2, // default: 0
+      "space-before-blocks": [ 2, "always" ], // default: [ 0, "always" ]
+      "space-before-function-paren": [ 2, "never" ], // default: [ 0, "always" ]
+      "space-in-parens": [ 2, "never" ], // default: [ 0, "never" ]
+      "space-infix-ops": 2, // default: 0
+      "space-unary-ops": [ 2, { "words": true, "nonwords": false } ], // default: [ 0, { "words": true, "nonwords": false } ]
+      "spaced-comment": [ 2, "always" ], // default: 0
+      "wrap-regex": 2 // default: 0
+    }
+  }

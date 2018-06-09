@@ -1,7 +1,7 @@
 'use strict';
 
 const fs      = require('fs');
-const ImageJS = require("imagejs");
+const ImageJS = require('imagejs');
 
 const WHITE_COLOR = { r: 255, g: 255, b: 255, a: 0 };
 
@@ -27,7 +27,7 @@ async function writePixelArrayToFile(file, binaryPixelArray = null, hexaPixelArr
 
 		if (hexaPixelArray !== null) {
 			if (binaryPixelArray !== null) {
-				content += '\n\n'
+				content += '\n\n';
 			}
 
 			content += getHexaPixelArrayString(hexaPixelArray);
@@ -39,12 +39,12 @@ async function writePixelArrayToFile(file, binaryPixelArray = null, hexaPixelArr
 			}
 
 			resolve();
-		})
+		});
 	});
 }
 
 function isPixelPresent(red, green, blue) {
-	return (red + green + blue) / 3 > (255 * 0.5);
+	return (red + green + blue) / 3 > 255 * 0.5;
 }
 
 function modifyPicture(bitmap, options) {
@@ -66,8 +66,8 @@ function modifyPicture(bitmap, options) {
 			width: options.resize.width || bitmap.width,
 			height: options.resize.height || bitmap.height,
 			fit: options.resize.fit || 'crop',
-			algorithm: options.resize.algorithm || "nearestNeighbor"
-		})
+			algorithm: options.resize.algorithm || 'nearestNeighbor'
+		});
 	}
 
 	if (typeof options.rotate != 'undefined') {
@@ -117,7 +117,7 @@ function getHexaPixelArray(bitmap) {
 
 		if (remainingBinaries !== 0) {
 			let binaryArray = binaryPixelArray[rowIndex].slice(column);
-			
+
 			for (let i = 0; i < remainingBinaries; i++) {
 				binaryArray.push(0);
 			}
@@ -146,7 +146,7 @@ function getHexaPixelArrayString(pixelArray) {
 function convertBinaryArrayToHexaString(binaryArray) {
 	let binaryString = binaryArray.join(''),
 		binaryNumber = parseInt(binaryString, 2),
-		hexaString = '0X' + ('0' + (Number(binaryNumber).toString(16))).slice(-2).toUpperCase();
+		hexaString = '0X' + ('0' + Number(binaryNumber).toString(16)).slice(-2).toUpperCase();
 
 	return hexaString;
 }
