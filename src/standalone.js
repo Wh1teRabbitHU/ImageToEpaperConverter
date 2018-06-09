@@ -1,6 +1,6 @@
 'use strict';
 
-const argsReader = require('./handlers/args-reader');
+const argsReader = require('./helpers/args-reader');
 const converter  = require('./handlers/converter');
 
 const SRC_FILE_KEY = 'src';
