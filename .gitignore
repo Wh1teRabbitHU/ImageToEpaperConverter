@@ -62,6 +62,7 @@ typings/
 
 # Ignore images
 .jpg
+.jpeg
 .bmp
 .png
 
