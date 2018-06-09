@@ -1,21 +1,27 @@
 {
-  "name": "image_converter",
-  "version": "0.0.1",
-  "description": "BMP to hexadecimal image data converter for the e_paper library",
+  "name": "image_to_epaper_converter",
+  "version": "0.0.2",
+  "description": "Utility tool for WaveShare's e-paper modules. It can convert any jpg, bmp or png to binary or hexadecimal array",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "bmp",
+    "jpg",
+    "png",
     "hexa",
     "converter",
     "image",
-    "epaper"
+    "epaper",
+    "waveshare"
   ],
   "author": "Wh1te_Rabbit",
   "license": "GPL-3.0",
   "dependencies": {
     "imagejs": "0.0.9"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1"
   }
 }

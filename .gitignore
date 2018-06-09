@@ -60,7 +60,14 @@ typings/
 # next.js build output
 .next
 
-# Exclude images
+# Ignore images
 *.jpg
 *.bmp
 *.png
+
+# Ignore all but the default options
+!options/default.json
+options/*.json
+
+# Ignore out folder
+output/
