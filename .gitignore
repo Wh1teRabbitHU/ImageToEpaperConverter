@@ -61,10 +61,10 @@ typings/
 .next
 
 # Ignore images
-.jpg
-.jpeg
-.bmp
-.png
+*.jpg
+*.jpeg
+*.bmp
+*.png
 
 # Ignore all but the default options
 !options/default.json
