@@ -1,6 +1,6 @@
 {
   "name": "image_to_epaper_converter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Utility tool for WaveShare's e-paper modules. It can convert any jpg, bmp or png to binary or hexadecimal array",
   "main": "index.js",
   "scripts": {
