@@ -2,19 +2,10 @@
 
 const fs = require('fs');
 
-function getBinaryPixelArrayString(pixelArray) {
-	let pixelArrayString = '';
-
-	pixelArray.forEach((row) => {
-		pixelArrayString += row.join(',') + '\n';
-	});
-
-	return pixelArrayString;
-}
-
-function getHexaPixelArrayString(pixelArray) {
-	return pixelArray.join(',');
-}
+const EXTENSIONS = {
+	CPP_HEADER: '.h',
+	CPP_MAIN: '.cpp'
+};
 
 async function isFileReadable(file) {
 	return new Promise((resolve, reject) => {
@@ -28,23 +19,9 @@ async function isFileReadable(file) {
 	});
 }
 
-async function writePixelArrayToFile(file, binaryPixelArray = null, hexaPixelArray = null) {
+async function writeContentToFile(file, text) {
 	return new Promise((resolve, reject) => {
-		let content = '';
-
-		if (binaryPixelArray !== null) {
-			content += getBinaryPixelArrayString(binaryPixelArray);
-		}
-
-		if (hexaPixelArray !== null) {
-			if (binaryPixelArray !== null) {
-				content += '\n\n';
-			}
-
-			content += getHexaPixelArrayString(hexaPixelArray);
-		}
-
-		fs.writeFile(file, content, 'utf8', (err) => {
+		fs.writeFile(file, text, 'utf8', (err) => {
 			if (err) {
 				reject(err);
 			}
@@ -56,5 +33,7 @@ async function writePixelArrayToFile(file, binaryPixelArray = null, hexaPixelArr
 
 module.exports = {
 	isFileReadable: isFileReadable,
-	writePixelArrayToFile: writePixelArrayToFile
+	writeContentToFile: writeContentToFile,
+
+	EXTENSIONS: EXTENSIONS
 };
