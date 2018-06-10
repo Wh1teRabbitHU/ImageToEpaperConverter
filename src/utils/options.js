@@ -1,6 +1,13 @@
 'use strict';
 
 const OPTION_KEYS = {
+	SOURCE_FILE: 'source_file', // Source file
+	TARGET_FOLDER: 'target_folder', // Target folder path
+	TARGET_TEXT_FILENAME: 'target_text_filename', // Target filename, placed in the target folder
+	TARGET_CPP_FILENAME: 'target_cpp_filename', // Filename wothout extension, placed in the target folder
+	CPP_VARIABLE_NAME: 'cpp_variable_name', // Filename wothout extension, placed in the target folder
+	TASKS: 'tasks', // 'binary', 'hexadecimal', 'hexadecimal_cpp'
+
 	DISPLAY_WIDTH: 'display.width', // numbers
 	DISPLAY_HEIGHT: 'display.height', // numbers
 	DISPLAY_FITMODE: 'display.fitmode', // 'none', 'center', 'repeat'

@@ -3,6 +3,20 @@
 const imageUtils   = require('../utils/image');
 const optionsUtils = require('../utils/options');
 
+function getBinaryPixelArrayString(pixelArray) {
+	let pixelArrayString = '';
+
+	pixelArray.forEach((row) => {
+		pixelArrayString += row.join(',') + '\n';
+	});
+
+	return pixelArrayString;
+}
+
+function getHexaPixelArrayString(pixelArray) {
+	return pixelArray.join(',');
+}
+
 function getBinaryPixelArray(bitmap, options = {}) {
 	let pixelArray = [],
 		maxWidth = bitmap.width,
@@ -83,7 +97,7 @@ function getHexaPixelArray(bitmap, options = {}) {
 	for (let rowIndex = 0; rowIndex < binaryPixelArray.length; rowIndex++) {
 		let column;
 
-		for (column = 0; column < binaryPixelArray[rowIndex].length; column += 8) {
+		for (column = 0; column + 8 <= binaryPixelArray[rowIndex].length; column += 8) {
 			let binaryArray = binaryPixelArray[rowIndex].slice(column, column + 8);
 
 			pixelArray.push(convertBinaryArrayToHexaString(binaryArray));
@@ -114,6 +128,8 @@ function convertBinaryArrayToHexaString(binaryArray) {
 }
 
 module.exports = {
+	getBinaryPixelArrayString: getBinaryPixelArrayString,
+	getHexaPixelArrayString: getHexaPixelArrayString,
 	getBinaryPixelArray: getBinaryPixelArray,
 	getHexaPixelArray: getHexaPixelArray
 };
