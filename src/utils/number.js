@@ -3,6 +3,9 @@
 const imageUtils   = require('../utils/image');
 const optionsUtils = require('../utils/options');
 
+const COLORED_FLAG = 0;
+const WHITE_FLAG = 1;
+
 function getBinaryPixelArrayString(pixelArray) {
 	let pixelArrayString = '';
 
@@ -24,9 +27,8 @@ function getBinaryPixelArray(bitmap, options = {}) {
 		columnOffset = 0,
 		rowOffset = 0,
 		fitMode = optionsUtils.get(options, optionsUtils.OPTION_KEYS.DISPLAY_FITMODE, 'none'),
-		colorMode = optionsUtils.get(options, optionsUtils.OPTION_KEYS.DISPLAY_COLORMODE, 'normal'),
-		coloredFlag = 0,
-		whiteFlag = 1;
+		fillMode = optionsUtils.get(options, optionsUtils.OPTION_KEYS.DISPLAY_FILLMODE, 'normal'),
+		colorMode = optionsUtils.get(options, optionsUtils.OPTION_KEYS.DISPLAY_COLORMODE, 'normal');
 
 	if (optionsUtils.has(options, optionsUtils.OPTION_KEYS.DISPLAY_WIDTH)) {
 		maxWidth = optionsUtils.get(options, optionsUtils.OPTION_KEYS.DISPLAY_WIDTH);
@@ -46,11 +48,6 @@ function getBinaryPixelArray(bitmap, options = {}) {
 		}
 	}
 
-	if (colorMode === 'inverted') {
-		coloredFlag = 1;
-		whiteFlag = 0;
-	}
-
 	for (let column = 0; column < maxHeight; column++) {
 		let rowArray = [];
 
@@ -60,7 +57,7 @@ function getBinaryPixelArray(bitmap, options = {}) {
 
 			if (fitMode === 'center') {
 				if (x < rowOffset || x > rowOffset + bitmap.width || y < columnOffset || y > columnOffset + bitmap.height) {
-					rowArray.push(whiteFlag);
+					rowArray.push(fillMode === 'normal' ? WHITE_FLAG : COLORED_FLAG);
 
 					continue;
 				} else {
@@ -69,7 +66,7 @@ function getBinaryPixelArray(bitmap, options = {}) {
 				}
 			} else if (bitmap.width < x || bitmap.height < y) {
 				if (fitMode === 'none') {
-					rowArray.push(whiteFlag);
+					rowArray.push(fillMode === 'normal' ? WHITE_FLAG : COLORED_FLAG);
 
 					continue;
 				} else if (fitMode === 'repeat') {
@@ -77,6 +74,9 @@ function getBinaryPixelArray(bitmap, options = {}) {
 					y = bitmap.height < y ? y % bitmap.height : y;
 				}
 			}
+
+			let coloredFlag = colorMode === 'normal' ? COLORED_FLAG : WHITE_FLAG,
+				whiteFlag = colorMode === 'normal' ? WHITE_FLAG : COLORED_FLAG;
 
 			let pixel = bitmap.getPixel(x, y),
 				binaryPixel = imageUtils.isPixelPresent(pixel.r, pixel.g, pixel.b) ? coloredFlag : whiteFlag;

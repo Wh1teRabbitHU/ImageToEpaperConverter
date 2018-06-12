@@ -13,7 +13,7 @@ function modifyPicture(bitmap, options) {
 		return bitmap;
 	}
 
-	if (optionsUtils.has(options, optionsUtils.OPTION_KEYS.IMAGE_CROP)) {
+	if (optionsUtils.get(options, optionsUtils.OPTION_KEYS.IMAGE_CROP_ENABLED, false)) {
 		bitmap = bitmap.crop({
 			top: optionsUtils.get(options, optionsUtils.OPTION_KEYS.IMAGE_CROP_TOP, 0),
 			left: optionsUtils.get(options, optionsUtils.OPTION_KEYS.IMAGE_CROP_LEFT, 0),
@@ -22,7 +22,7 @@ function modifyPicture(bitmap, options) {
 		});
 	}
 
-	if (optionsUtils.has(options, optionsUtils.OPTION_KEYS.IMAGE_RESIZE)) {
+	if (optionsUtils.get(options, optionsUtils.OPTION_KEYS.IMAGE_RESIZE_ENABLED, false)) {
 		bitmap = bitmap.resize({
 			width: optionsUtils.get(options, optionsUtils.OPTION_KEYS.IMAGE_RESIZE_WIDTH, bitmap.width),
 			height: optionsUtils.get(options, optionsUtils.OPTION_KEYS.IMAGE_RESIZE_HEIGHT, bitmap.height),
@@ -31,9 +31,11 @@ function modifyPicture(bitmap, options) {
 		});
 	}
 
-	if (optionsUtils.has(options, optionsUtils.OPTION_KEYS.IMAGE_ROTATE)) {
+	let rotateDegrees = optionsUtils.get(options, optionsUtils.OPTION_KEYS.IMAGE_ROTATE_DEGREES, 0);
+
+	if (optionsUtils.get(options, optionsUtils.OPTION_KEYS.IMAGE_ROTATE_ENABLED, false) && rotateDegrees !== 0) {
 		bitmap = bitmap.rotate({
-			degrees: optionsUtils.get(options, optionsUtils.OPTION_KEYS.IMAGE_ROTATE_DEGREES, 0),
+			degrees: rotateDegrees,
 			fit: optionsUtils.get(options, optionsUtils.OPTION_KEYS.IMAGE_ROTATE_FIT, 'crop'),
 			padColor: optionsUtils.get(options, optionsUtils.OPTION_KEYS.IMAGE_ROTATE_PADCOLOR, WHITE_COLOR)
 		});

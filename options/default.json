@@ -1,2 +1,41 @@
 {
+	"source_file": "picture.jpeg",
+	"target_folder": "output",
+	"target_text_filename": "picture.txt",
+	"target_cpp_filename": "picture",
+	"cpp_variable_name": "PICTURE",
+	"tasks": [ "binary", "hexadecimal", "hexadecimal_cpp" ],
+	"display": {
+		"width": 128,
+		"height": 296,
+		"fitmode": "none",
+		"colormode": "inverted"
+	},
+	"image": {
+		"crop": {
+			"enabled": false,
+			"top": 0,
+			"left": 0,
+			"width": 0,
+			"height": 0
+		},
+		"resize": {
+			"enabled": false,
+			"width": 128,
+			"height": 296,
+			"fit": "crop",
+			"algorithm": "nearestNeighbor"
+		},
+		"rotate": {
+			"enabled": false,
+			"degrees": 0,
+			"fit": "crop",
+			"padColor": {
+				"r": 0,
+				"g": 0,
+				"b": 0,
+				"a": 0
+			}
+		}
+	}
 }
