@@ -11,6 +11,7 @@ const OPTION_KEYS = {
 	DISPLAY_WIDTH: 'display.width', // numbers
 	DISPLAY_HEIGHT: 'display.height', // numbers
 	DISPLAY_FITMODE: 'display.fitmode', // 'none', 'center', 'repeat'
+	DISPLAY_FILLMODE: 'display.fillmode', // 'normal', 'inverted'
 	DISPLAY_COLORMODE: 'display.colormode', // 'normal', 'inverted'
 
 	IMAGE_CROP: 'image.crop',
