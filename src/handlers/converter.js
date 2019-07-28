@@ -13,15 +13,25 @@ async function convert(options = {}) {
 		sourceFile = optionsUtils.get(options, optionsUtils.OPTION_KEYS.SOURCE_FILE),
 		targetFolder = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_FOLDER),
 		targetFilename = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_TEXT_FILENAME),
-		targetCppFilename = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_CPP_FILENAME);
+		targetCppFilename = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_CPP_FILENAME),
+		readFromFile = optionsUtils.get(optionsUtils, optionsUtils.READ_FROM_FILE);
+
 
 	try {
-		await fileUtils.isFileReadable(sourceFile);
-		await bitmap.readFile(sourceFile);
+		if (options.read_from_file) {
+			await fileUtils.isFileReadable(sourceFile);
+			await bitmap.readFile(sourceFile);
+		} else {
+			bitmap = options.bitmap;
+		}
 
 		bitmap = imageUtils.modifyPicture(bitmap, options);
 
 		let tasks = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TASKS, 'binary');
+
+		if (Array.isArray(tasks) && returnArray) {
+			throw "can only return Array of one task!";
+		}
 
 		if (!Array.isArray(tasks)) {
 			tasks = [ tasks ];
@@ -41,18 +51,18 @@ async function convert(options = {}) {
 				case 'binary':
 					binaryPixelArray = numberUtils.getBinaryPixelArray(bitmap, options);
 
-					fileContent += numberUtils.getBinaryPixelArrayString(binaryPixelArray);
+					if (!returnArray) fileContent += numberUtils.getBinaryPixelArrayString(binaryPixelArray);
 					break;
 				case 'hexadecimal':
 					hexaPixelArray = numberUtils.getHexaPixelArray(bitmap, options);
 
-					fileContent += numberUtils.getHexaPixelArrayString(hexaPixelArray);
+					if (!returnArray) fileContent += numberUtils.getHexaPixelArrayString(hexaPixelArray);
 					break;
 				case 'hexadecimal_cpp':
 					hexaPixelArray = numberUtils.getHexaPixelArray(bitmap, options);
 
-					cppHeaderFileContent = cppUtils.createCHeaderContent(options);
-					cppMainFileContent = cppUtils.createCMainContent(hexaPixelArray, options);
+					if (!returnArray) cppHeaderFileContent = cppUtils.createCHeaderContent(options);
+					if (!returnArray) cppMainFileContent = cppUtils.createCMainContent(hexaPixelArray, options);
 					break;
 				default:
 					break;
@@ -70,7 +80,9 @@ async function convert(options = {}) {
 			await fileUtils.writeContentToFile(targetCppFileRoot + fileUtils.EXTENSIONS.CPP_MAIN, cppMainFileContent);
 		}
 
-		console.log('Successfully converted the given image file! Source file: ' + sourceFile, ', target folder: ' + targetFolder);
+		if (!returnArray) console.log('Successfully converted the given image file! Source file: ' + sourceFile, ', target folder: ' + targetFolder);
+		if (returnArray && binaryPixelArray) return binaryPixelArray;
+		if (returnArray && hexaPixelArray) return hexaPixelArray;
 	} catch (err) {
 		console.error(err);
 	}
