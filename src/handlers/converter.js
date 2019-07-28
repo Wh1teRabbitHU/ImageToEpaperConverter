@@ -14,11 +14,11 @@ async function convert(options = {}) {
 		targetFolder = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_FOLDER),
 		targetFilename = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_TEXT_FILENAME),
 		targetCppFilename = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_CPP_FILENAME),
-		readFromFile = optionsUtils.get(optionsUtils, optionsUtils.READ_FROM_FILE);
+		readFromFile = optionsUtils.get(optionsUtils, optionsUtils.READ_FROM_FILE, true);
 
 
 	try {
-		if (options.read_from_file) {
+		if (readFromFile) {
 			await fileUtils.isFileReadable(sourceFile);
 			await bitmap.readFile(sourceFile);
 		} else {
