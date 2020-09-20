@@ -7,6 +7,7 @@ const OPTION_KEYS = {
 	TARGET_CPP_FILENAME: 'target_cpp_filename', // Filename wothout extension, placed in the target folder
 	CPP_VARIABLE_NAME: 'cpp_variable_name', // Filename wothout extension, placed in the target folder
 	TASKS: 'tasks', // 'binary', 'hexadecimal', 'hexadecimal_cpp'
+	READ_FROM_FILE: read_from_file,
 
 	DISPLAY_WIDTH: 'display.width', // numbers
 	DISPLAY_HEIGHT: 'display.height', // numbers
