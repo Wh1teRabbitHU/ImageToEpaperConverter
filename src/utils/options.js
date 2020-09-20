@@ -7,6 +7,8 @@ const OPTION_KEYS = {
 	TARGET_CPP_FILENAME: 'target_cpp_filename', // Filename wothout extension, placed in the target folder
 	CPP_VARIABLE_NAME: 'cpp_variable_name', // Filename wothout extension, placed in the target folder
 	TASKS: 'tasks', // 'binary', 'hexadecimal', 'hexadecimal_cpp'
+	RETURN_ARRAY: 'return_array', // boolean if data is directly returned or written to file
+
 
 	DISPLAY_WIDTH: 'display.width', // numbers
 	DISPLAY_HEIGHT: 'display.height', // numbers
