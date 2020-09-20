@@ -64,14 +64,14 @@ function getBinaryPixelArray(bitmap, options = {}) {
 					x -= rowOffset;
 					y -= columnOffset;
 				}
-			} else if (bitmap.width < x || bitmap.height < y) {
+			} else if (bitmap.width <= x || bitmap.height <= y) {
 				if (fitMode === 'none') {
 					rowArray.push(fillMode === 'normal' ? WHITE_FLAG : COLORED_FLAG);
 
 					continue;
 				} else if (fitMode === 'repeat') {
-					x = bitmap.width < x ? x % bitmap.width : x;
-					y = bitmap.height < y ? y % bitmap.height : y;
+					x = bitmap.width <= x ? x % bitmap.width : x;
+					y = bitmap.height <= y ? y % bitmap.height : y;
 				}
 			}
 
