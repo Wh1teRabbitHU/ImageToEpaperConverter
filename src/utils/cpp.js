@@ -1,5 +1,3 @@
-'use strict';
-
 const optionsUtils = require('../utils/options');
 
 const ARRAY_ELEMENT_PER_ROW = 8;

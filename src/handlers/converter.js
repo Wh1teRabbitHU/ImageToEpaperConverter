@@ -1,5 +1,3 @@
-'use strict';
-
 const path         = require('path');
 const ImageJS      = require('imagejs');
 const imageUtils   = require('../utils/image');

@@ -1,5 +1,3 @@
-'use strict';
-
 const imageUtils   = require('../utils/image');
 const optionsUtils = require('../utils/options');
 

@@ -1,5 +1,3 @@
-'use strict';
-
 const OPTION_KEYS = {
 	SOURCE_STREAM: 'source_stream', // Source stream
 	SOURCE_FILE: 'source_file', // Source file

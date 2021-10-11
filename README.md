@@ -39,8 +39,6 @@ node standalone =./options/other.json
 In a nodejs project you must pass the options as a javascript object:
 
 ```javascript
-'use strict';
-
 const converter = require('image_to_epaper_converter');
 
 converter.convert({

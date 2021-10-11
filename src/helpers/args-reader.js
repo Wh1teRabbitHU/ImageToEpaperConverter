@@ -1,5 +1,3 @@
-'use strict';
-
 const ARG_KEYS = {
 	OPTIONS_PATH: 'options_path',
 	TASK: 'task',

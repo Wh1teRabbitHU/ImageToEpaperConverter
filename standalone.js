@@ -1,5 +1,3 @@
-'use strict';
-
 const argsReader = require('./src/helpers/args-reader');
 const converter  = require('./src/standalone');
 

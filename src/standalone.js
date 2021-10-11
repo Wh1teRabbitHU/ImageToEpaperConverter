@@ -1,5 +1,3 @@
-'use strict';
-
 const converter  = require('./handlers/converter');
 
 let options;
