@@ -1,7 +1,7 @@
 'use strict';
 
 const OPTION_KEYS = {
-	SOURCE_DATA: 'source_data', // Source data
+	SOURCE_STREAM: 'source_stream', // Source stream
 	SOURCE_FILE: 'source_file', // Source file
 	TARGET_FOLDER: 'target_folder', // Target folder path
 	TARGET_TEXT_FILENAME: 'target_text_filename', // Target filename, placed in the target folder

@@ -82,8 +82,8 @@ console.log({
 
 ## Available option parameters:
 
-- source_data: A stream variable which contains the image. If this option is not given, the script will use the source_file instead!
-- source_file: The picture's absolute path (or relative to the project), the extension has to be either bmp, jpg, jpeg or png. Only used if source_data is not given!
+- source_stream: A stream instance which contains the image. If this option is not provided, the script will use the source_file instead!
+- source_file: The picture's absolute path (or relative to the project), the extension has to be either bmp, jpg, jpeg or png. Only used if source_stream is not given!
 - target_folder: All the generated files are placed here. It can be a relative path to your project.
 - target_text_filename: All the processed data goes to this file. If multiple task provided to the converter, then then it will put every output in this file, separated with empty lines.
 - target_cpp_filename: Its the basename for generating the cpp files. Header and main codes are separated

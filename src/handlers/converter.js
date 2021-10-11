@@ -10,7 +10,7 @@ const cppUtils     = require('../utils/cpp');
 
 async function convert(options = {}) {
 	let bitmap = new ImageJS.Bitmap(),
-		sourceStream = optionsUtils.get(options, optionsUtils.OPTION_KEYS.SOURCE_DATA, null),
+		sourceStream = optionsUtils.get(options, optionsUtils.OPTION_KEYS.SOURCE_STREAM, null),
 		sourceFile = optionsUtils.get(options, optionsUtils.OPTION_KEYS.SOURCE_FILE, ''),
 		targetFolder = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_FOLDER, 'target'),
 		targetFilename = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_TEXT_FILENAME),
