@@ -6,18 +6,24 @@ const imageUtils   = require('../utils/image');
 const fileUtils    = require('../utils/file');
 const numberUtils  = require('../utils/number');
 const optionsUtils = require('../utils/options');
-const cppUtils       = require('../utils/cpp');
+const cppUtils     = require('../utils/cpp');
 
 async function convert(options = {}) {
 	let bitmap = new ImageJS.Bitmap(),
-		sourceFile = optionsUtils.get(options, optionsUtils.OPTION_KEYS.SOURCE_FILE),
-		targetFolder = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_FOLDER),
+		sourceStream = optionsUtils.get(options, optionsUtils.OPTION_KEYS.SOURCE_DATA, null),
+		sourceFile = optionsUtils.get(options, optionsUtils.OPTION_KEYS.SOURCE_FILE, ''),
+		targetFolder = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_FOLDER, 'target'),
 		targetFilename = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_TEXT_FILENAME),
-		targetCppFilename = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_CPP_FILENAME);
+		targetCppFilename = optionsUtils.get(options, optionsUtils.OPTION_KEYS.TARGET_CPP_FILENAME),
+		saveToFile = optionsUtils.get(options, optionsUtils.OPTION_KEYS.SAVE_TO_FILE, true);
 
 	try {
-		await fileUtils.isFileReadable(sourceFile);
-		await bitmap.readFile(sourceFile);
+		if (sourceStream === null) {
+			await fileUtils.isFileReadable(sourceFile);
+			await bitmap.readFile(sourceFile);
+		} else {
+			await bitmap.read(sourceStream);
+		}
 
 		bitmap = imageUtils.modifyPicture(bitmap, options);
 
@@ -30,7 +36,9 @@ async function convert(options = {}) {
 		let fileContent = '',
 			cppHeaderFileContent = '',
 			cppMainFileContent = '',
-			binaryPixelArray, hexaPixelArray = null;
+			binaryPixelArray = null,
+			hexaPixelArray = null,
+			output = { succeeded: true };
 
 		tasks.forEach((task) => {
 			if (fileContent !== '') {
@@ -41,15 +49,23 @@ async function convert(options = {}) {
 				case 'binary':
 					binaryPixelArray = numberUtils.getBinaryPixelArray(bitmap, options);
 
+					output.binary = binaryPixelArray;
+
 					fileContent += numberUtils.getBinaryPixelArrayString(binaryPixelArray);
 					break;
 				case 'hexadecimal':
 					hexaPixelArray = numberUtils.getHexaPixelArray(bitmap, options);
 
+					output.hexadecimal = hexaPixelArray.map(num => parseInt(num, 16));
+					output.hexadecimalString = hexaPixelArray;
+
 					fileContent += numberUtils.getHexaPixelArrayString(hexaPixelArray);
 					break;
 				case 'hexadecimal_cpp':
 					hexaPixelArray = numberUtils.getHexaPixelArray(bitmap, options);
+
+					output.hexadecimal = hexaPixelArray.map(num => parseInt(num, 16));
+					output.hexadecimalString = hexaPixelArray;
 
 					cppHeaderFileContent = cppUtils.createCHeaderContent(options);
 					cppMainFileContent = cppUtils.createCMainContent(hexaPixelArray, options);
@@ -59,11 +75,11 @@ async function convert(options = {}) {
 			}
 		});
 
-		if (fileContent !== '') {
+		if (saveToFile && fileContent !== '') {
 			await fileUtils.writeContentToFile(path.join(targetFolder, targetFilename), fileContent);
 		}
 
-		if (cppHeaderFileContent !== '' && cppMainFileContent !== '') {
+		if (saveToFile && cppHeaderFileContent !== '' && cppMainFileContent !== '') {
 			let targetCppFileRoot = path.join(targetFolder, targetCppFilename);
 
 			await fileUtils.writeContentToFile(targetCppFileRoot + fileUtils.EXTENSIONS.CPP_HEADER, cppHeaderFileContent);
@@ -71,8 +87,12 @@ async function convert(options = {}) {
 		}
 
 		console.log('Successfully converted the given image file! Source file: ' + sourceFile, ', target folder: ' + targetFolder);
-	} catch (err) {
-		console.error(err);
+
+		return output;
+	} catch (error) {
+		console.error(error);
+
+		return { succeeded: false, error };
 	}
 }
 

@@ -72,3 +72,4 @@ options/*.json
 
 # Ignore out folder
 output/
+.vscode

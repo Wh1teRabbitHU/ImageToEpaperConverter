@@ -3,6 +3,7 @@
 	"target_folder": "output",
 	"target_text_filename": "picture.txt",
 	"target_cpp_filename": "picture",
+	"save_to_file": true,
 	"cpp_variable_name": "PICTURE",
 	"tasks": [ "binary", "hexadecimal", "hexadecimal_cpp" ],
 	"display": {

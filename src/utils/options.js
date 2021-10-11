@@ -1,10 +1,12 @@
 'use strict';
 
 const OPTION_KEYS = {
+	SOURCE_DATA: 'source_data', // Source data
 	SOURCE_FILE: 'source_file', // Source file
 	TARGET_FOLDER: 'target_folder', // Target folder path
 	TARGET_TEXT_FILENAME: 'target_text_filename', // Target filename, placed in the target folder
 	TARGET_CPP_FILENAME: 'target_cpp_filename', // Filename wothout extension, placed in the target folder
+	SAVE_TO_FILE: 'save_to_file', // This option will determine if it's going to save the output to file or not
 	CPP_VARIABLE_NAME: 'cpp_variable_name', // Filename wothout extension, placed in the target folder
 	TASKS: 'tasks', // 'binary', 'hexadecimal', 'hexadecimal_cpp'
 
@@ -45,7 +47,11 @@ function get(options, key, defaultValue) {
 	}
 
 	if (key.indexOf('.') === -1) {
-		return options[key] || defaultValue;
+		if (typeof options[key] == 'undefined') {
+			return defaultValue;
+		}
+
+		return options[key];
 	}
 
 	let keyParts = key.split('.');

@@ -4,7 +4,8 @@
   "description": "Utility tool for WaveShare's e-paper modules. It can convert any jpg, bmp or png to binary or hexadecimal array",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "standalone": "node standalone"
   },
   "keywords": [
     "bmp",

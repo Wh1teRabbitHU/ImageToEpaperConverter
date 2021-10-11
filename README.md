@@ -44,7 +44,7 @@ In a nodejs project you must pass the options as a javascript object:
 const converter = require('image_to_epaper_converter');
 
 converter.convert({
-	source_file: "picture.jpeg",
+	source_file: "picture.jpeg", // or providing 'source_data' as an image stream
 	target_folder: "output",
 	target_text_filename: "picture.txt",
 	target_cpp_filename: "picture",
@@ -59,12 +59,35 @@ converter.convert({
 });
 ```
 
+Update: Now the convert method return with a result object in the following form:
+
+```javascript
+// Result when succeeded:
+console.log({
+	succeeded: true,
+	// Only when binary task is selected
+	binary: [ [ 0,1,1,1,0,0,1 ], [ 0,1,0,1,0,0,1 ], [ 0,0,0,1,0,0,1 ] /* ... */ ],
+	// Only when either hexadecimal or hexadecimal_cpp is selected
+	hexadecimal: [ 255, 250, 34 /* ... */ ],
+	// Only when either hexadecimal or hexadecimal_cpp is selected
+	hexadecimalString: [ '0xFF', '0xFA', '0x22' /* ... */ ]
+});
+
+// Result when failed:
+console.log({
+	succeeded: false,
+	error: { /* error details, content depending on the error */ }
+});
+```
+
 ## Available option parameters:
 
-- source_file: The picture's absolute path (or relative to the project) Its exstension must be either bmp, jpg, jpeg or png
+- source_data: A stream variable which contains the image. If this option is not given, the script will use the source_file instead!
+- source_file: The picture's absolute path (or relative to the project), the extension has to be either bmp, jpg, jpeg or png. Only used if source_data is not given!
 - target_folder: All the generated files are placed here. It can be a relative path to your project.
 - target_text_filename: All the processed data goes to this file. If multiple task provided to the converter, then then it will put every output in this file, separated with empty lines.
 - target_cpp_filename: Its the basename for generating the cpp files. Header and main codes are separated
+- save_to_file: If this flag is false, the script won't save the output into file(s). It's usefull if you want to consume the result programatically. This flag is true by default.
 - cpp_variable_name: It defines the variable's name in the generated cpp files.
 - tasks: Its an array (or when you only need one task, you can use string aswell) with the converters tasks. All tasks are executed when you call the convert function. Available tasks: binary, hexadecimal, hexadecimal_cpp
 - display: It describe the e-Paper modules properties.
