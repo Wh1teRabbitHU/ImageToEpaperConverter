@@ -31,7 +31,7 @@ node standalone
 You can provide a different options file with the 'options_path' param:
 
 ```bash
-node standalone =./options/other.json
+node standalone options_path=./options/other.json
 ```
 
 ## From nodejs:
